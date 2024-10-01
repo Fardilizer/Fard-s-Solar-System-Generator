@@ -1,0 +1,203 @@
+-- FARD'S SOLAR SYSTEM GENERATOR --
+
+local rand = math.random(1, 100)
+local rand2 = math.random(1, 100)
+
+local function age(m,l)
+    local age = math.floor((1/(m/(1.9891*(10^30)))^2.5)*10000000000)
+    age = math.floor(age/1000)
+    age = age*1000
+    num = string.len(age)
+    if num >= 6 then
+        if num == 6 then
+            age = (age/100000)
+            rand2 = 5
+        elseif num == 7 then
+            age = (age/1000000)
+            rand2 = 6
+        elseif num == 8 then
+            age = (age/10000000)
+            rand2 = 7
+        elseif num == 9 then
+            age = (age/100000000)
+            rand2 = 8
+        elseif num == 10 then
+            age = (age/1000000000)
+            rand2 = 9
+        elseif num == 11 then
+            age = (age/10000000000)
+            rand2 = 10
+        elseif num == 12 then
+            age = (age/100000000000)
+            rand2 = 11
+        elseif num == 13 then
+            age = (age/1000000000000)
+            rand2 = 12
+        elseif num == 14 then
+            age = (age/10000000000000)
+            rand2 = 13
+        end
+        print("|   AGE : ~"..age.."e+"..rand2.." YEARS")
+    else
+    print("|   AGE : ~"..age.." YEARS")
+    end
+end
+
+local function lumin(r,t,m)
+    local luminos = (((r/695700)^2)*((t/5778)^4))*100000
+    luminos = math.floor(luminos*(3.846*(10^26)))
+    luminos = math.floor(luminos)
+    print("|   SOLAR LUMINOSITY : ~"..luminos.." WATTS")
+    age(m,luminos)
+end
+
+local function temp(m,r)
+    local temp = math.floor(5772*(math.sqrt((m/(1.9891*(10^30)))^1.25)))
+    temp = math.floor(temp/10)
+    temp = temp*10
+    print("|   SURFACE TEMPERATURE : ~"..temp.."° KELVIN")
+    lumin(r,temp,m)
+end
+
+local function size(a,b,H)
+    local radius = 0
+    if (H == 1) or (H == 3) or (H == 4) then
+        if a*(10^b) <= 1.9891*(10^30) then
+            radius = math.floor((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
+            radius = math.floor(radius/100)
+            radius = radius*100
+        else
+            radius = math.floor((((((a/100000)*(10^b))*0.57)/(1.9891*(10^30)))^(2/3))*695700)
+            radius = math.floor(radius/100)
+            radius = radius*100
+        end
+    elseif H == 2 then
+        radius = math.floor((((a/100000)*(10^b))*(-3.1622777*(10^-26.9)))+13250)
+        radius = math.floor(radius/100)
+        radius = radius*100
+    end
+    print("|   RADIUS : ~"..radius.." KILOMETERS")
+    temp(a/100000*(10^b),radius)
+end
+
+local function mass(t,H)
+    if t == 1 then
+        rand2 = math.random(31, 32)
+        if rand2 == 31 then
+            rand = math.random(397820, 999999)
+        else
+            rand = math.random(100000, 298365)
+        end
+    elseif t == 2 then
+        rand2 = math.random(30,31)
+        if rand2 == 30 then
+            rand = math.random(497275, 999999)
+        else
+            rand = math.random(100000, 397820)
+        end
+    elseif t == 3 then
+        rand = math.random(298365, 497275)
+        rand2 = 30
+    elseif t == 4 then
+        rand = math.random(218801, 298365)
+        rand2 = 30
+    elseif t == 5 then
+        rand = math.random(159128, 218801)
+        rand2 = 30
+    elseif t == 6 then
+        rand2 = math.random(29, 30)
+        if rand2 == 29 then
+            rand = math.random(994550, 999999)
+        else
+            rand = math.random(100000, 159128)
+        end
+    elseif t == 7 then
+        rand = math.random(159128, 994550)
+        rand2 = 29
+    elseif t == 8 then
+        rand = math.random(264550, 338147)
+        rand2  = math.random(29, 30)
+    elseif t == 9 then
+        rand = math.random(159128, 198910)
+        rand2 = math.random(31, 32)
+    elseif t == 10 then
+        rand = math.random(198910, 397820)
+        rand2 = 32
+    end
+        print("|   MASS : ~"..(rand/100000).."e+"..rand2.." KILOGRAMS")
+        size(rand,rand2,H)
+end
+
+local function msst()
+    rand = math.random(0,10000)
+    if rand <= 7 then
+        print("MAIN SEQUENCE TYPE O STAR")
+        mass(1,1)
+    elseif (rand <= 20) and (rand > 7) then
+        print("MAIN SEQUENCE TYPE B STAR")
+        mass(2,1)
+    elseif (rand <= 80) and (rand > 20) then
+        print("MAIN SEQUENCE TYPE A STAR")
+        mass(3,1)
+    elseif (rand <= 380) and (rand > 80) then
+        print("MAIN SEQUENCE TYPE F STAR")
+        mass(4,1)
+    elseif (rand <= 1140) and (rand > 380) then
+        print("MAIN SEQUENCE TYPE G STAR")
+        mass(5,1)
+    elseif (rand <= 2350) and (rand > 1140) then
+        print("MAIN SEQUENCE TYPE K STAR")
+        mass(6,1)
+    elseif (rand <= 10000) and (rand > 2350) then
+        print("MAIN SEQUENCE TYPE M STAR")
+        mass(7,1)
+    end
+    print()
+end
+
+local function system(ss)
+    for i = 1, ss, 1 do
+        rand = math.random(0,1000)
+        if rand <= 5 then
+            print("SUPERGIANT STAR")
+            mass(10,4)
+            print()
+        elseif (rand <= 10) and (rand > 5) then
+            print("GIANT STAR")
+            mass(9,3)
+            print()
+        elseif (rand <= 100) and (rand > 10) then
+            print("WHITE DWARF STAR")
+            mass(8,2)
+            print()
+        else
+            msst()
+        end
+    end
+end
+
+if rand2 <= 10 then
+    print("TRINARY SYSTEM")
+    print()
+    print("--------------")
+    print()
+    print("BINARY SYSTEM")
+    print()
+    system(2)
+    print("--------------")
+    print()
+    print("UNARY SYSTEM")
+    print()
+    system(1)
+    print()
+else
+    if rand <= 85 then
+        print("BINARY SYSTEM")
+        print()
+        system(2)
+    else
+        print("UNARY SYSTEM")
+        print()
+        system(1)
+    end
+end
