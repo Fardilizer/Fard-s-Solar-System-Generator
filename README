@@ -6,7 +6,7 @@ LINES : 203
 CODE TYPE : LUA
 
 = DESCRIPTION =
-A somewhat accurate solar system generator that you can use for anything you want. Generates only stars for now, planets will come later. ROBLOX game for this will come when it reaches Version 1. Script tends to be a bit buggy sometimes, so be mindful that the project is still in alpha stages.
+A somewhat accurate solar system generator that you can use for anything you want. Generates only stars for now, planets will come later. ROBLOX game for this will come when it reaches Version 1. Script tends to be a bit buggy sometimes, so be mindful that the project is still in early alpha stages.
 
 = USAGE =
 Copy the Solar System Generator Script into any online lua compiler. The script will print all the info into the output.
