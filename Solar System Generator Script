@@ -176,6 +176,9 @@ local function system(ss)
     end
 end
 
+print("-- FARD'S SOLAR SYSTEM GENERATOR --")
+print()
+
 if rand2 <= 10 then
     print("TRINARY SYSTEM")
     print()
