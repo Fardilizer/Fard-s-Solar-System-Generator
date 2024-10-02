@@ -5,77 +5,30 @@ local rand2 = math.random(1, 100)
 
 local function habitzone(l)
     local ri = math.floor((math.sqrt((l/(3.83*(10^26)))/1.1))*(1.496*(10^8)))
-    
+    local rand = 10
     local num = string.len(ri)
-    if num >= 6 then
-        if num == 6 then
-            ri = (ri/100000)
-            rand2 = 5
-        elseif num == 7 then
-            ri = (ri/1000000)
-            rand2 = 6
-        elseif num == 8 then
-            ri = (ri/10000000)
-            rand2 = 7
-        elseif num == 9 then
-            ri = (ri/100000000)
-            rand2 = 8
-        elseif num == 10 then
-            ri = (ri/1000000000)
-            rand2 = 9
-        elseif num == 11 then
-            ri = (ri/10000000000)
-            rand2 = 10
-        elseif num == 12 then
-            ri = (ri/100000000000)
-            rand2 = 11
-        elseif num == 13 then
-            ri = (ri/1000000000000)
-            rand2 = 12
-        elseif num == 14 then
-            ri = (ri/10000000000000)
-            rand2 = 13
-        end
-        print("|   INNER HABITABILITY RADIUS : "..ri.."e+"..rand2.." KM")
-    else
-        print("|   INNER HABITABILITY RADIUS : "..ri.." KM")
+
+    for i = 1, num, 1 do
+        rand = rand*10
     end
 
+    rand = rand/10000000
+    rand2 = num-1
+
+    print("|   INNER HABITABLE RADIUS : "..(math.floor(ri/rand)/100000).."e+"..rand2.." KM")
+
     local ro = math.floor((math.sqrt((l/(3.83*(10^26)))/0.53))*(1.496*(10^8)))
+    rand = 10
     num = string.len(ro)
-    if num >= 6 then
-        if num == 6 then
-            ro = (ro/100000)
-            rand2 = 5
-        elseif num == 7 then
-            ro = (ro/1000000)
-            rand2 = 6
-        elseif num == 8 then
-            ro = (ro/10000000)
-            rand2 = 7
-        elseif num == 9 then
-            ro = (ro/100000000)
-            rand2 = 8
-        elseif num == 10 then
-            ro = (ro/1000000000)
-            rand2 = 9
-        elseif num == 11 then
-            ro = (ro/10000000000)
-            rand2 = 10
-        elseif num == 12 then
-            ro = (ro/100000000000)
-            rand2 = 11
-        elseif num == 13 then
-            ro = (ro/1000000000000)
-            rand2 = 12
-        elseif num == 14 then
-            ro = (ro/10000000000000)
-            rand2 = 13
-        end
-        print("|   OUTER HABITABILITY RADIUS : "..ro.."e+"..rand2.." KM")
-    else
-        print("|   OUTER HABITABILITY RADIUS : "..ro.." KM")
+
+    for i = 1, num, 1 do
+        rand = rand*10
     end
+
+    rand = rand/10000000
+    rand2 = num-1
+
+    print("|   INNER HABITABLE RADIUS : "..(math.floor(ro/rand)/100000).."e+"..rand2.." KM")
 end
 
 local function age(m,l)
@@ -84,35 +37,16 @@ local function age(m,l)
     age = age*1000
     num = string.len(age)
     if num >= 6 then
-        if num == 6 then
-            age = (age/100000)
-            rand2 = 5
-        elseif num == 7 then
-            age = (age/1000000)
-            rand2 = 6
-        elseif num == 8 then
-            age = (age/10000000)
-            rand2 = 7
-        elseif num == 9 then
-            age = (age/100000000)
-            rand2 = 8
-        elseif num == 10 then
-            age = (age/1000000000)
-            rand2 = 9
-        elseif num == 11 then
-            age = (age/10000000000)
-            rand2 = 10
-        elseif num == 12 then
-            age = (age/100000000000)
-            rand2 = 11
-        elseif num == 13 then
-            age = (age/1000000000000)
-            rand2 = 12
-        elseif num == 14 then
-            age = (age/10000000000000)
-            rand2 = 13
+        rand = 10
+
+        for i = 1, num, 1 do
+            rand = rand*10
         end
-        print("|   AGE : ~"..age.."e+"..rand2.." YEARS")
+
+        rand = rand/10000000
+        rand2 = num-1
+
+        print("|   AGE : ~"..(math.floor(age/rand)/100000).."e+"..rand2.." YEARS")
     else
     print("|   AGE : ~"..age.." YEARS")
     end
