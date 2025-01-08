@@ -1,34 +1,60 @@
 -- FARD'S SOLAR SYSTEM GENERATOR --
 
-local rand = math.random(1, 100)
-local rand2 = math.random(1, 100)
+local rand = math.random(1,100)
+local rand2 = math.random(1,100)
+local r1, r2
+local sunM = 1.9891*(10^30)
+local sunT = 5772
+
+local function tempToColor(temp)
+    local Red, Blue, Green
+    if temp >= 2400 and temp < 3700 then
+        Red = 250
+        Green = math.floor((0.0769231*temp)-134.61538)
+        Blue = 50
+    elseif temp >= 3700 and temp < 5200 then
+        Red = 250
+        Green = math.floor((0.0666667*temp)-96.66667)
+        Blue = 50
+    elseif temp >= 5200 and temp < 6000 then
+        Red = 250
+        Green = 250
+        Blue = math.floor((0.125*temp)-600)
+    elseif temp >= 6000 and temp < 7500 then
+        Red = 250
+        Green = 250
+        Blue = math.floor((0.0666667*temp)-250)
+    elseif temp >= 7500 and temp < 10000 then
+        Red = math.floor(((0-0.04)*temp)+550)
+        Green = math.floor(((0-0.04)*temp)+550)
+        Blue = 250
+    elseif temp >= 10000 and temp < 30000 then
+        Red = math.floor(((0-0.005)*temp)+200)
+        Green = math.floor(((0-0.005)*temp)+200)
+        Blue = 250
+    end
+    print("|   RGB COLOR : "..Red..", "..Green..", "..Blue)
+end
 
 local function habitzone(l)
     local ri = math.floor((math.sqrt((l/(3.83*(10^26)))/1.1))*(1.496*(10^8)))
     local rand = 10
     local num = string.len(ri)
-
     for i = 1, num, 1 do
         rand = rand*10
     end
-
     rand = rand/10000000
     rand2 = num-1
-
-    print("|   INNER HABITABLE RADIUS : "..(math.floor(ri/rand)/100000).."e+"..rand2.." KM")
-
+    print("|   INNER HABITABLE RADIUS : "..(math.floor(ri/rand)/100000).."e+"..rand2.." KILOMETERS")
     local ro = math.floor((math.sqrt((l/(3.83*(10^26)))/0.53))*(1.496*(10^8)))
     rand = 10
     num = string.len(ro)
-
     for i = 1, num, 1 do
         rand = rand*10
     end
-
     rand = rand/10000000
     rand2 = num-1
-
-    print("|   INNER HABITABLE RADIUS : "..(math.floor(ro/rand)/100000).."e+"..rand2.." KM")
+    print("|   INNER HABITABLE RADIUS : "..(math.floor(ro/rand)/100000).."e+"..rand2.." KILOMETERS")
 end
 
 local function age(m,l)
@@ -38,14 +64,11 @@ local function age(m,l)
     num = string.len(age)
     if num >= 6 then
         rand = 10
-
         for i = 1, num, 1 do
             rand = rand*10
         end
-
         rand = rand/10000000
         rand2 = num-1
-
         print("|   AGE : ~"..(math.floor(age/rand)/100000).."e+"..rand2.." YEARS")
     else
     print("|   AGE : ~"..age.." YEARS")
@@ -62,16 +85,17 @@ local function lumin(r,t,m)
 end
 
 local function temp(m,r)
-    local temp = math.floor(5772*(math.sqrt((m/(1.9891*(10^30)))^1.25)))
+    local temp = math.floor(((0-(3.30361*(10^(0-123))))*(m^4))+(((7.10671*(10^(0-91))))*(m^3))-(((4.96994*(10^(0-59))))*(m^2))+(((1.77781*(10^(0-27))))*m)+2371.26571)
     temp = math.floor(temp/10)
     temp = temp*10
     print("|   SURFACE TEMPERATURE : ~"..temp.."° KELVIN")
     lumin(r,temp,m)
+    tempToColor(temp)
 end
 
 local function size(a,b,H)
     local radius = 0
-    if (H == 1) or (H == 3) or (H == 4) then
+    if (H == "MS") then
         if a*(10^b) <= 1.9891*(10^30) then
             radius = math.floor((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
             radius = math.floor(radius/100)
@@ -81,7 +105,7 @@ local function size(a,b,H)
             radius = math.floor(radius/100)
             radius = radius*100
         end
-    elseif H == 2 then
+    elseif H == "WD" then
         radius = math.floor((((a/100000)*(10^b))*(-3.1622777*(10^-26.9)))+13250)
         radius = math.floor(radius/100)
         radius = radius*100
@@ -91,94 +115,84 @@ local function size(a,b,H)
 end
 
 local function mass(t,H)
-    if t == 1 then
-        rand2 = math.random(31, 32)
-        if rand2 == 31 then
-            rand = math.random(397820, 999999)
+    if t == "MSTM" then
+        rand2 = 29
+        rand = math.random(159128,895095)
+    elseif t == "MSTK" then
+        rand2 = math.random(29,30)
+        if rand2 == 29 then
+            rand = math.random(895095,999999)
         else
-            rand = math.random(100000, 298365)
+            rand = math.random(100000,159128)
         end
-    elseif t == 2 then
+    elseif t == "MSTG" then
+        rand2 = 30
+        rand = math.random(159128,206866)
+    elseif t == "MSTF" then
+        rand2 = 30
+        rand = math.random(206866,278474)
+    elseif t == "MSTA" then
+        rand2 = 30
+        rand = math.random(278474,417711)
+    elseif t == "MSTB" then
         rand2 = math.random(30,31)
         if rand2 == 30 then
-            rand = math.random(497275, 999999)
+            rand = math.random(417711,999999)
         else
-            rand = math.random(100000, 397820)
+            rand = math.random(100000,318256)
         end
-    elseif t == 3 then
-        rand = math.random(298365, 497275)
-        rand2 = 30
-    elseif t == 4 then
-        rand = math.random(218801, 298365)
-        rand2 = 30
-    elseif t == 5 then
-        rand = math.random(159128, 218801)
-        rand2 = 30
-    elseif t == 6 then
-        rand2 = math.random(29, 30)
+    elseif t == "MSTO" then
+        rand2 = 31
+        rand = math.random(318256,397820)
+    elseif t == "WD" then
+        rand2 = math.random(29,30)
         if rand2 == 29 then
-            rand = math.random(994550, 999999)
+            rand = math.random(338147,999999)
         else
-            rand = math.random(100000, 159128)
+            rand = math.random(100000,264550)
         end
-    elseif t == 7 then
-        rand = math.random(159128, 994550)
-        rand2 = 29
-    elseif t == 8 then
-        rand = math.random(264550, 338147)
-        rand2  = math.random(29, 30)
-    elseif t == 9 then
-        rand = math.random(159128, 198910)
-        rand2 = math.random(31, 32)
-    elseif t == 10 then
-        rand = math.random(198910, 397820)
-        rand2 = 32
     end
-        print("|   MASS : ~"..(rand/100000).."e+"..rand2.." KILOGRAMS")
-        size(rand,rand2,H)
+    print("|   MASS : ~"..(rand/100000).."e+"..rand2.." KILOGRAMS")
+    size(rand,rand2,H)
 end
 
 local function msst()
-    rand = math.random(0,10000)
-    if rand <= 7 then
+    rand = math.random(0,100000)
+    if rand <= 75 then
         print("MAIN SEQUENCE TYPE O STAR")
-        mass(1,1)
-    elseif (rand <= 20) and (rand > 7) then
+        mass("MSTO","MS")
+    elseif (rand <= 200) and (rand > 75) then
         print("MAIN SEQUENCE TYPE B STAR")
-        mass(2,1)
-    elseif (rand <= 80) and (rand > 20) then
+        mass("MSTB","MS")
+    elseif (rand <= 1000) and (rand > 200) then
         print("MAIN SEQUENCE TYPE A STAR")
-        mass(3,1)
-    elseif (rand <= 380) and (rand > 80) then
+        mass("MSTA","MS")
+    elseif (rand <= 4000) and (rand > 1000) then
         print("MAIN SEQUENCE TYPE F STAR")
-        mass(4,1)
-    elseif (rand <= 1140) and (rand > 380) then
+        mass("MSTF","MS")
+    elseif (rand <= 12000) and (rand > 4000) then
         print("MAIN SEQUENCE TYPE G STAR")
-        mass(5,1)
-    elseif (rand <= 2350) and (rand > 1140) then
+        mass("MSTG","MS")
+    elseif (rand <= 24000) and (rand > 12000) then
         print("MAIN SEQUENCE TYPE K STAR")
-        mass(6,1)
-    elseif (rand <= 10000) and (rand > 2350) then
+        mass("MSTK","MS")
+    elseif (rand <= 100000) and (rand > 24000) then
         print("MAIN SEQUENCE TYPE M STAR")
-        mass(7,1)
+        mass("MSTM","MS")
     end
     print()
 end
 
 local function system(ss)
     for i = 1, ss, 1 do
-        rand = math.random(0,1000)
-        if rand <= 5 then
-            print("SUPERGIANT STAR")
-            mass(10,4)
-            print()
-        elseif (rand <= 10) and (rand > 5) then
+        rand = math.random(0,100000000000)
+        if rand <= 1000000000 then
             print("GIANT STAR")
-            mass(9,3)
+            mass("G","G")
             print()
-        elseif (rand <= 100) and (rand > 10) then
+        elseif (rand <= 10000000000) and (rand > 1000000000) then
             print("WHITE DWARF STAR")
-            mass(8,2)
+            mass("WD","WD")
             print()
         else
             msst()
