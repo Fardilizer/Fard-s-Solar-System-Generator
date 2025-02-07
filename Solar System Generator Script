@@ -16,27 +16,6 @@ local function tempToColor(temp)
     print("|   RGB COLOR : "..Red..", "..Green..", "..Blue)
 end
 
-local function habitzone(l)
-    local ri = math.floor((math.sqrt((l/(3.83*(10^26)))/1.1))*(1.496*(10^8)))
-    local rand = 10
-    local num = string.len(ri)
-    for i = 1, num, 1 do
-        rand = rand*10
-    end
-    rand = rand/10000000
-    rand2 = num-1
-    print("|   INNER HABITABLE RADIUS : "..(math.floor(ri/rand)/100000).."e+"..rand2.." KILOMETERS")
-    local ro = math.floor((math.sqrt((l/(3.83*(10^26)))/0.53))*(1.496*(10^8)))
-    rand = 10
-    num = string.len(ro)
-    for i = 1, num, 1 do
-        rand = rand*10
-    end
-    rand = rand/10000000
-    rand2 = num-1
-    print("|   INNER HABITABLE RADIUS : "..(math.floor(ro/rand)/100000).."e+"..rand2.." KILOMETERS")
-end
-
 local function age(m,l)
     local age = math.floor((1/(m/(1.9891*(10^30)))^2.5)*10000000000)
     age = math.floor(age/1000)
@@ -53,7 +32,6 @@ local function age(m,l)
     else
     print("|   AGE : ~"..age.." YEARS")
     end
-    habitzone(l)
 end
 
 local function lumin(r,t,m)
