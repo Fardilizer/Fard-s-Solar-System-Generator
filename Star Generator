@@ -1,0 +1,177 @@
+-- FARD'S STAR GENERATOR --
+
+local Mass1 = 0
+local Mass2 = 0
+
+-- <Mass1> e+ <Mass2> KG
+-- <Mass1> *10^ <Mass2> KG
+
+local rand = math.random(1,100)
+local rand2 = math.random(1,100)
+local r1, r2
+
+local sunM = 1.9891*(10^30)
+local sunT = 5772
+
+local function tempToColor(temp)
+    local Red = 3
+    local Green = 3
+    local Blue = 3
+    if temp >= 2100 and temp < 3400 then
+        Red = 255
+        Green = math.floor((0.00461538*temp)+194.30769)
+        Blue = math.floor((0.0384615*temp)+30.23077)
+    elseif temp >= 3400 and temp < 4900 then
+        Red = 255
+        Green = math.floor((0.0226667*temp)+132.93333)
+        Blue = math.floor((0.0486667*temp)-4.46667)
+    elseif temp >= 4900 and temp < 5700 then
+        Red = math.floor(((0-0.00875)*temp)+297.875)
+        Green = math.floor((0.00375*temp)+225.625)
+        Blue = math.floor((0.02625*temp)+105.375)
+    elseif temp >= 5700 and temp < 7200 then
+        Red = math.floor(((0-0.0306667)*temp)+422.8)
+        Green = math.floor(((0-0.0213333)*temp)+368.6)
+        Blue = 255
+    elseif temp >= 7200 and temp < 9700 then
+        Red = math.floor(((0-0.0128)*temp)+294.16)
+        Green = math.floor(((0-0.0096)*temp)+284.12)
+        Blue = 255
+    elseif temp >= 9700 and temp < 30000 then
+        Red = math.floor(((0-0.000738916)*temp)+177.16749)
+        Green = math.floor(((0-0.00738916)*temp)+198.16749)
+        Blue = 255
+    end
+    print("|   RGB COLOR : "..Red..", "..Green..", "..Blue)
+end
+
+local function age(m,l)
+    local age = math.floor((1/(m/(1.9891*(10^30)))^2.5)*10000000000)
+    age = math.floor(age/1000)
+    age = age*1000
+    num = string.len(age)
+    if num >= 6 then
+        rand = 10
+        for i = 1, num, 1 do
+            rand = rand*10
+        end
+        rand = rand/10000000
+        rand2 = num-1
+        print("|   AGE : ~"..(math.floor(age/rand)/100000).."e+"..rand2.." YEARS")
+    else
+    print("|   AGE : ~"..age.." YEARS")
+    end
+end
+
+local function lumin(r,t,m)
+    local luminos = (((r/695700)^2)*((t/5778)^4))*100000
+    luminos = math.floor(luminos*(3.846*(10^26)))
+    luminos = math.floor(luminos)
+    print("|   SOLAR LUMINOSITY : ~"..luminos.." WATTS")
+    age(m,luminos)
+end
+
+local function temp(m,r)
+    local temp = math.floor(((0-(3.30361*(10^(0-123))))*(m^4))+(((7.10671*(10^(0-91))))*(m^3))-(((4.96994*(10^(0-59))))*(m^2))+(((1.77781*(10^(0-27))))*m)+2371.26571)
+    temp = math.floor(temp/10)
+    temp = temp*10
+    print("|   SURFACE TEMPERATURE : ~"..temp.."° KELVIN")
+    lumin(r,temp,m)
+    tempToColor(temp)
+end
+
+local function size(a,b,H)
+    local radius = 0
+    if (H == "MS") then
+        if a*(10^b) <= 1.9891*(10^30) then
+            radius = math.floor((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
+            radius = math.floor(radius/100)
+            radius = radius*100
+        else
+            radius = math.floor((((((a/100000)*(10^b))*0.57)/(1.9891*(10^30)))^(2/3))*695700)
+            radius = math.floor(radius/100)
+            radius = radius*100
+        end
+    elseif H == "WD" then
+        radius = math.floor((((a/100000)*(10^b))*(-3.1622777*(10^-26.9)))+13250)
+        radius = math.floor(radius/100)
+        radius = radius*100
+    end
+    print("|   RADIUS : ~"..radius.." KILOMETERS")
+    temp(a/100000*(10^b),radius)
+end
+
+local function mass(M1,M2)
+    local t
+    if M2 = 29 then
+        if M1 <= 159128 and M1 > 895095 then
+            t = "MSTM"
+        elseif M1 <= 895095 and M1 > 999999 then
+            t = "MSTK"
+    elseif M2 = 30 then
+        if M1 <= 1000000 and M1 > 159128 then
+            t = "MSTK"
+        elseif M1 <= 159128 and M1 > 206866 then
+            t = "MSTG"
+        elseif M1 <= 206866 and M1 > 278474 then
+            t = "MSTF"
+        elseif M1 <= 278474 and M1 > 417711 then
+            t = "MSTA"
+        elseif M1 <= 417711 and M1 > 999999 then
+            t = "MSTB"
+    elseif M2 = 31 then
+        if
+end
+
+local function mass(t,H)
+    elseif t == "MSTA" then
+        rand2 = 30
+        rand = math.random(278474,417711)
+    elseif t == "MSTB" then
+        rand2 = math.random(30,31)
+        if rand2 == 30 then
+            rand = math.random(417711,999999)
+        else
+            rand = math.random(100000,318256)
+        end
+    elseif t == "MSTO" then
+        rand2 = 31
+        rand = math.random(318256,397820)
+    elseif t == "WD" then
+        rand2 = math.random(29,30)
+        if rand2 == 29 then
+            rand = math.random(338147,999999)
+        else
+            rand = math.random(100000,264550)
+        end
+    end
+    print("|   MASS : ~"..(rand/100000).."e+"..rand2.." KILOGRAMS")
+    size(rand,rand2,H)
+end
+
+local function msst()
+    rand = math.random(0,100000)
+    if rand <= 75 then
+        print("MAIN SEQUENCE TYPE O STAR")
+        mass("MSTO","MS")
+    elseif (rand <= 200) and (rand > 75) then
+        print("MAIN SEQUENCE TYPE B STAR")
+        mass("MSTB","MS")
+    elseif (rand <= 1000) and (rand > 200) then
+        print("MAIN SEQUENCE TYPE A STAR")
+        mass("MSTA","MS")
+    elseif (rand <= 4000) and (rand > 1000) then
+        print("MAIN SEQUENCE TYPE F STAR")
+        mass("MSTF","MS")
+    elseif (rand <= 12000) and (rand > 4000) then
+        print("MAIN SEQUENCE TYPE G STAR")
+        mass("MSTG","MS")
+    elseif (rand <= 24000) and (rand > 12000) then
+        print("MAIN SEQUENCE TYPE K STAR")
+        mass("MSTK","MS")
+    elseif (rand <= 100000) and (rand > 24000) then
+        print("MAIN SEQUENCE TYPE M STAR")
+        mass("MSTM","MS")
+    end
+    print()
+end
