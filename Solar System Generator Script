@@ -10,8 +10,30 @@ local function tempToColor(temp)
     local Red = 3
     local Green = 3
     local Blue = 3
-    if temp <= 5700 and temp >= 4900 then
-        Red = (((0-0.0000343137)*temp)+1.16814)*255
+    if temp >= 2100 and temp < 3400 then
+        Red = 255
+        Green = math.floor((0.00461538*temp)+194.30769)
+        Blue = math.floor((0.0384615*temp)+30.23077)
+    elseif temp >= 3400 and temp < 4900 then
+        Red = 255
+        Green = math.floor((0.0226667*temp)+132.93333)
+        Blue = math.floor((0.0486667*temp)-4.46667)
+    elseif temp >= 4900 and temp < 5700 then
+        Red = math.floor(((0-0.00875)*temp)+297.875)
+        Green = math.floor((0.00375*temp)+225.625)
+        Blue = math.floor((0.02625*temp)+105.375)
+    elseif temp >= 5700 and temp < 7200 then
+        Red = math.floor(((0-0.0306667)*temp)+422.8)
+        Green = math.floor(((0-0.0213333)*temp)+368.6)
+        Blue = 255
+    elseif temp >= 7200 and temp < 9700 then
+        Red = math.floor(((0-0.0128)*temp)+294.16)
+        Green = math.floor(((0-0.0096)*temp)+284.12)
+        Blue = 255
+    elseif temp >= 9700 and temp < 30000 then
+        Red = math.floor(((0-0.000738916)*temp)+177.16749)
+        Green = math.floor(((0-0.00738916)*temp)+198.16749)
+        Blue = 255
     end
     print("|   RGB COLOR : "..Red..", "..Green..", "..Blue)
 end
