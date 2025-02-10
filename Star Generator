@@ -1,7 +1,7 @@
 -- FARD'S STAR GENERATOR --
 
-local Mass1 = 0
-local Mass2 = 0
+local Mass1 = 119346
+local Mass2 = 31
 
 -- <Mass1> e+ <Mass2> KG
 -- <Mass1> *10^ <Mass2> KG
@@ -82,18 +82,12 @@ end
 
 local function size(a,b,H)
     local radius = 0
-    if (H == "MS") then
-        if a*(10^b) <= 1.9891*(10^30) then
-            radius = math.floor((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
-            radius = math.floor(radius/100)
-            radius = radius*100
-        else
-            radius = math.floor((((((a/100000)*(10^b))*0.57)/(1.9891*(10^30)))^(2/3))*695700)
-            radius = math.floor(radius/100)
-            radius = radius*100
-        end
-    elseif H == "WD" then
-        radius = math.floor((((a/100000)*(10^b))*(-3.1622777*(10^-26.9)))+13250)
+    if a*(10^b) <= 1.9891*(10^30) then
+        radius = math.floor((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
+        radius = math.floor(radius/100)
+        radius = radius*100
+    else
+        radius = math.floor((((((a/100000)*(10^b))*0.57)/(1.9891*(10^30)))^(2/3))*695700)
         radius = math.floor(radius/100)
         radius = radius*100
     end
@@ -103,75 +97,34 @@ end
 
 local function mass(M1,M2)
     local t
-    if M2 = 29 then
-        if M1 <= 159128 and M1 > 895095 then
-            t = "MSTM"
-        elseif M1 <= 895095 and M1 > 999999 then
-            t = "MSTK"
-    elseif M2 = 30 then
-        if M1 <= 1000000 and M1 > 159128 then
-            t = "MSTK"
-        elseif M1 <= 159128 and M1 > 206866 then
-            t = "MSTG"
-        elseif M1 <= 206866 and M1 > 278474 then
-            t = "MSTF"
-        elseif M1 <= 278474 and M1 > 417711 then
-            t = "MSTA"
-        elseif M1 <= 417711 and M1 > 999999 then
-            t = "MSTB"
-    elseif M2 = 31 then
-        if
-end
-
-local function mass(t,H)
-    elseif t == "MSTA" then
-        rand2 = 30
-        rand = math.random(278474,417711)
-    elseif t == "MSTB" then
-        rand2 = math.random(30,31)
-        if rand2 == 30 then
-            rand = math.random(417711,999999)
-        else
-            rand = math.random(100000,318256)
+    if M2 == 29 then
+        if M1 >= 159128 and M1 < 895095 then
+            t = "MAIN SEQUENCE M TYPE"
+        elseif M1 >= 895095 and M1 < 999999 then
+            t = "MAIN SEQUENCE K TYPE"
         end
-    elseif t == "MSTO" then
-        rand2 = 31
-        rand = math.random(318256,397820)
-    elseif t == "WD" then
-        rand2 = math.random(29,30)
-        if rand2 == 29 then
-            rand = math.random(338147,999999)
-        else
-            rand = math.random(100000,264550)
+    elseif M2 == 30 then
+        if M1 >= 1000000 and M1 < 159128 then
+            t = "MAIN SEQUENCE K TYPE"
+        elseif M1 >= 159128 and M1 < 206866 then
+            t = "MAIN SEQUENCE G TYPE"
+        elseif M1 >= 206866 and M1 < 278474 then
+            t = "MAIN SEQUENCE F TYPE"
+        elseif M1 >= 278474 and M1 < 417711 then
+            t = "MAIN SEQUENCE A TYPE"
+        elseif M1 >= 417711 and M1 < 999999 then
+            t = "MAIN SEQUENCE B TYPE"
+        end
+    elseif M2 == 31 then
+        if M1 >= 100000 and M1 < 318256 then
+            t = "MAIN SEQUENCE B TYPE"
+        elseif M1 >= 318256 and M1 < 999999 then
+            t = "MAIN SEQUENCE O TYPE"
         end
     end
-    print("|   MASS : ~"..(rand/100000).."e+"..rand2.." KILOGRAMS")
-    size(rand,rand2,H)
+    print("|   STAR TYPE : "..t)
+    print("|   MASS : ~"..(M1/100000).."e+"..M2.." KILOGRAMS")
+    size(M1,M2,H)
 end
 
-local function msst()
-    rand = math.random(0,100000)
-    if rand <= 75 then
-        print("MAIN SEQUENCE TYPE O STAR")
-        mass("MSTO","MS")
-    elseif (rand <= 200) and (rand > 75) then
-        print("MAIN SEQUENCE TYPE B STAR")
-        mass("MSTB","MS")
-    elseif (rand <= 1000) and (rand > 200) then
-        print("MAIN SEQUENCE TYPE A STAR")
-        mass("MSTA","MS")
-    elseif (rand <= 4000) and (rand > 1000) then
-        print("MAIN SEQUENCE TYPE F STAR")
-        mass("MSTF","MS")
-    elseif (rand <= 12000) and (rand > 4000) then
-        print("MAIN SEQUENCE TYPE G STAR")
-        mass("MSTG","MS")
-    elseif (rand <= 24000) and (rand > 12000) then
-        print("MAIN SEQUENCE TYPE K STAR")
-        mass("MSTK","MS")
-    elseif (rand <= 100000) and (rand > 24000) then
-        print("MAIN SEQUENCE TYPE M STAR")
-        mass("MSTM","MS")
-    end
-    print()
-end
+mass(Mass1,Mass2)
