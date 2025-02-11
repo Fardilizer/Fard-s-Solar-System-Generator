@@ -106,7 +106,7 @@ local function mass(M1,M2)
             t = "MAIN SEQUENCE K TYPE"
         end
     elseif M2 == 30 then
-        if M1 >= 1000000 and M1 < 159128 then
+        if M1 >= 100000 and M1 < 159128 then
             t = "MAIN SEQUENCE K TYPE"
         elseif M1 >= 159128 and M1 < 206866 then
             t = "MAIN SEQUENCE G TYPE"
