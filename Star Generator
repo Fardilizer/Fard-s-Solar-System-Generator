@@ -6,6 +6,8 @@ local Mass2 = 31
 -- <Mass1> e+ <Mass2> KG
 -- <Mass1> *10^ <Mass2> KG
 
+math.round = function(n) return n >= 0.0 and n-n%-1 or n-n% 1 end
+
 local rand = math.random(1,100)
 local rand2 = math.random(1,100)
 local r1, r2
@@ -17,37 +19,37 @@ local function tempToColor(temp)
     local Red = 3
     local Green = 3
     local Blue = 3
-    if temp >= 2100 and temp < 3400 then
+    if temp >= 2000 and temp < 3500 then
         Red = 255
-        Green = math.floor((0.00461538*temp)+194.30769)
-        Blue = math.floor((0.0384615*temp)+30.23077)
+        Green = math.round((0.004*temp)+196)
+        Blue = math.round((0.0333333*temp)+44.33333)
     elseif temp >= 3400 and temp < 4900 then
         Red = 255
-        Green = math.floor((0.0226667*temp)+132.93333)
-        Blue = math.floor((0.0486667*temp)-4.46667)
+        Green = math.round((0.0226667*temp)+130.66667)
+        Blue = math.round((0.0486667*temp)-9.33333)
     elseif temp >= 4900 and temp < 5700 then
-        Red = math.floor(((0-0.00875)*temp)+297.875)
-        Green = math.floor((0.00375*temp)+225.625)
-        Blue = math.floor((0.02625*temp)+105.375)
+        Red = math.round(((0-0.007)*temp)+290)
+        Green = math.round(0.003*temp)+229
+        Blue = math.round((0.021*temp)+129)
     elseif temp >= 5700 and temp < 7200 then
-        Red = math.floor(((0-0.0306667)*temp)+422.8)
-        Green = math.floor(((0-0.0213333)*temp)+368.6)
+        Red = math.round(((0-0.0306667)*temp)+432)
+        Green = math.round(((0-0.0213333)*temp)+375)
         Blue = 255
     elseif temp >= 7200 and temp < 9700 then
-        Red = math.floor(((0-0.0128)*temp)+294.16)
-        Green = math.floor(((0-0.0096)*temp)+284.12)
+        Red = math.round(((0-0.0128)*temp)+298)
+        Green = math.round(((0-0.0096)*temp)+287)
         Blue = 255
     elseif temp >= 9700 and temp < 30000 then
-        Red = math.floor(((0-0.000738916)*temp)+177.16749)
-        Green = math.floor(((0-0.00738916)*temp)+198.16749)
+        Red = math.round(((0-0.00075)*temp)+177.5)
+        Green = math.round(((0-0.00075)*temp)+198.5)
         Blue = 255
     end
     print("|   RGB COLOR : "..Red..", "..Green..", "..Blue)
 end
 
 local function age(m,l)
-    local age = math.floor((1/(m/(1.9891*(10^30)))^2.5)*10000000000)
-    age = math.floor(age/1000)
+    local age = math.round((1/(m/(1.9891*(10^30)))^2.5)*10000000000)
+    age = math.round(age/1000)
     age = age*1000
     num = string.len(age)
     if num >= 6 then
@@ -65,15 +67,15 @@ end
 
 local function lumin(r,t,m)
     local luminos = (((r/695700)^2)*((t/5778)^4))*100000
-    luminos = math.floor(luminos*(3.846*(10^26)))
-    luminos = math.floor(luminos)
+    luminos = math.round(luminos*(3.846*(10^26)))
+    luminos = math.round(luminos)
     print("|   SOLAR LUMINOSITY : ~"..luminos.." WATTS")
     age(m,luminos)
 end
 
 local function temp(m,r)
-    local temp = math.floor(((0-(3.30361*(10^(0-123))))*(m^4))+(((7.10671*(10^(0-91))))*(m^3))-(((4.96994*(10^(0-59))))*(m^2))+(((1.77781*(10^(0-27))))*m)+2371.26571)
-    temp = math.floor(temp/10)
+    local temp = math.round((((m/sunM)^2.5)^(1/4))*sunT)
+    temp = math.round(temp/10)
     temp = temp*10
     print("|   SURFACE TEMPERATURE : ~"..temp.."° KELVIN")
     lumin(r,temp,m)
@@ -83,12 +85,12 @@ end
 local function size(a,b,H)
     local radius = 0
     if a*(10^b) <= 1.9891*(10^30) then
-        radius = math.floor((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
-        radius = math.floor(radius/100)
+        radius = math.round((((((a/100000)*(10^b))*0.8)/(1.9891*(10^30)))^(2/3))*695700)
+        radius = math.round(radius/100)
         radius = radius*100
     else
-        radius = math.floor((((((a/100000)*(10^b))*0.57)/(1.9891*(10^30)))^(2/3))*695700)
-        radius = math.floor(radius/100)
+        radius = math.round((((((a/100000)*(10^b))*0.57)/(1.9891*(10^30)))^(2/3))*695700)
+        radius = math.round(radius/100)
         radius = radius*100
     end
     print("|   RADIUS : ~"..radius.." KILOMETERS")
